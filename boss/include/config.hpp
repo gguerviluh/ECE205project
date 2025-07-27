@@ -24,6 +24,10 @@ namespace config {
     // Boss size
     constexpr float bossWidth = 100.0f;
     constexpr float bossHeight = 160.0f;
+
+    //Healthbar sizing
+    constexpr float healthWidth = 400.0f;
+    constexpr float healthHeight = 10.0f;
 }
 
 #endif // CONFIG_HPP
