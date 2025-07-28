@@ -60,3 +60,5 @@ bool Player::isColliding(const Hitbox& other) const {
 int Player::getHealth() const { return health; }
 bool Player::isGrounded() const { return grounded; }
 void Player::setGrounded(bool val) { grounded = val; }
+int*  Player::getHealthPtr() { return &health;}
+

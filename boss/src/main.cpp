@@ -2,12 +2,17 @@
 #include "player.hpp"
 #include "config.hpp"
 #include "boss.hpp"
+#include "healthbar.hpp"
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(config::windowWidth, config::windowHeight), "Platformer Boss Fight");
     window.setFramerateLimit(60);
 
     Player player(sf::Vector2f(100, config::groundY - config::playerHeight));
-    Boss boss(sf::Vector2f( 1800, config::groundY -config::bossHeight));
+    Healthbar playerHealth(player.getHealthPtr(), sf::Vector2f(0, 100));
+
+    Boss boss(sf::Vector2f(1800, config::groundY -config::bossHeight));
+    Healthbar bossHealth(boss.getHealthPtr(), sf::Vector2f(800, 0));
     sf::Clock clock;
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
@@ -22,6 +27,9 @@ int main() {
         player.update(dt);
 	boss.update(dt);
 
+	playerHealth.update();
+	bossHealth.update();
+
         window.clear(sf::Color::Black);
 
         // Draw ground
@@ -32,9 +40,12 @@ int main() {
 
         // Draw player
         player.draw(window);
+	playerHealth.draw(window);
 
 	//Draw boss
 	boss.draw(window);
+	bossHealth.draw(window);
+
         window.display();
     }
     return 0;

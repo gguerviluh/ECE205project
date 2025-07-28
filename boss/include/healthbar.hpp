@@ -8,7 +8,10 @@ class Healthbar {
 public:
 	//int* const prevents pointer from being changed, value can still be changed 
 	Healthbar(int* const health, const sf::Vector2f& pos);
+
 	void draw(sf::RenderWindow& window);
+	void update();
+	void setPosition(const sf::Vector2f& pos);
 private:
 	int* health;
 	int maxHealth;

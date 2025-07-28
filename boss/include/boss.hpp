@@ -20,6 +20,7 @@ public:
     int getHealth() const;
     bool isGrounded() const;
     void setGrounded(bool val);
+    int* getHealthPtr();
 
 private:
     sf::RectangleShape shape;
