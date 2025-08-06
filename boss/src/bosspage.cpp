@@ -32,15 +32,8 @@ void Page2::handleEvent(sf::Event& event, sf::RenderWindow& window, float dt) {
             AppManager::getInstance().changePage(std::make_unique<StartPage>());
         }
     }	
-    boss.update(dt);
-    player.handleInput();
-    player.update(dt);
-
-    playerHealth.update();
-    bossHealth.update();
    
 }
-
 void Page2::draw(sf::RenderWindow& window) {
     window.draw(ground);
     for (auto& panel : panels) {
@@ -54,4 +47,11 @@ void Page2::draw(sf::RenderWindow& window) {
     playerHealth.draw(window);
     player.draw(window);
 }
+void Page2::update(float dt) {
+    boss.update(dt);
+    player.handleInput();
+    player.update(dt);
 
+    playerHealth.update();
+    bossHealth.update();
+}

@@ -25,7 +25,7 @@ private:
 public:
     Page2();
     void handleEvent(sf::Event& event, sf::RenderWindow& window, float dt) override;
-    void update(float dt) override{}
+    void update(float dt) override;
     void draw(sf::RenderWindow& window) override;
 };
 #endif // BOSSPAGE_HPP
