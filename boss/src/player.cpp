@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-Player::Player(const sf::Vector2f& pos) : grounded(false), health(100), jumpsLeft(maxJumps) {
+Player::Player(const sf::Vector2f& pos) : grounded(false), health(600), jumpsLeft(maxJumps) {
     shape.setSize(sf::Vector2f(config::playerWidth, config::playerHeight));
     shape.setFillColor(sf::Color::Red);
     setPosition(pos);
@@ -55,6 +55,13 @@ sf::FloatRect Player::getBounds() const {
 
 bool Player::isColliding(const Hitbox& other) const {
     return getBounds().intersects(other.getBounds());
+}
+
+void Player::takeDamage(int damage) {
+       	health -= damage;
+	if (health < 0) {
+		health = 0;
+	}
 }
 
 int Player::getHealth() const { return health; }

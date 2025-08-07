@@ -22,7 +22,7 @@ public:
     bool isGrounded() const;
     void setGrounded(bool val);
     int* getHealthPtr();
-
+    void takeDamage(int damage);
 
 private:
     sf::RectangleShape shape;

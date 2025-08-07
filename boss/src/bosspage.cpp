@@ -1,13 +1,14 @@
 #include "bosspage.hpp"
 #include "appmanager.hpp"
 #include "startpage.hpp"
+#include <iostream>
 
 Page2::Page2() :
     ground(sf::Vector2f(config::windowWidth, 10)),
     boss(sf::Vector2f(1800.f, config::groundY - config::bossHeight)),
-    bossHealth(boss.getHealthPtr(), sf::Vector2f(800, 0)),
+    bossHealth(boss.getHealthPtr(), sf::Vector2f(760,803)),
     player(sf::Vector2f(100, config::groundY - config::playerHeight)),
-    playerHealth(player.getHealthPtr(), sf::Vector2f(0, 100))
+    playerHealth(player.getHealthPtr(), sf::Vector2f(100,3))
     {
     ground.setPosition(0 , config::groundY);
     ground.setFillColor(sf::Color::Green);
@@ -31,8 +32,11 @@ void Page2::handleEvent(sf::Event& event, sf::RenderWindow& window, float dt) {
         if (isClicked(backBtn, mousePos)) {
             AppManager::getInstance().changePage(std::make_unique<StartPage>());
         }
-    }	
-   
+    }
+    if (player.isColliding(boss)) {
+	    player.takeDamage(5);
+	    std::cout << "damage taken"<< std::endl;
+	}
 }
 void Page2::draw(sf::RenderWindow& window) {
     window.draw(ground);
