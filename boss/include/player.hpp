@@ -4,8 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "hitbox.hpp"
 #include "config.hpp"
+#include "attack.hpp"
+#include "slash.hpp"
 
-// player.hpp (only showing relevant changes)
 class Player : public Hitbox {
 public:
     Player(const sf::Vector2f& pos);
@@ -23,16 +24,21 @@ public:
     void setGrounded(bool val);
     int* getHealthPtr();
     void takeDamage(int damage);
+    void startAttack();
+    bool isAttacking() const;
+  
+
 
 private:
+    Slash slash;
     sf::RectangleShape shape;
     sf::Vector2f velocity;
     bool grounded;
     int health;
-
+    
     int jumpsLeft;
+    bool facingRight;
     static constexpr int maxJumps = config::maxJumps; 
-
 };
 
 

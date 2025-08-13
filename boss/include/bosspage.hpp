@@ -8,6 +8,9 @@
 #include "boss.hpp"
 #include "healthbar.hpp"
 #include "config.hpp"
+#include "attack.hpp"
+#include "slash.hpp"
+
 class Page2 : public Page {
 private:
     sf::Font font;

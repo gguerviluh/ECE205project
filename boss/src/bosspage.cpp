@@ -30,13 +30,14 @@ void Page2::handleEvent(sf::Event& event, sf::RenderWindow& window, float dt) {
         event.mouseButton.button == sf::Mouse::Left) {
         auto mousePos = window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
         if (isClicked(backBtn, mousePos)) {
+            printf("hi1\n");
             AppManager::getInstance().changePage(std::make_unique<StartPage>());
         }
     }
     if (player.isColliding(boss)) {
 	    player.takeDamage(5);
 	    std::cout << "damage taken"<< std::endl;
-	}
+    }
 }
 void Page2::draw(sf::RenderWindow& window) {
     window.draw(ground);

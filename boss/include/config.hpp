@@ -28,6 +28,15 @@ namespace config {
     //Healthbar sizing
     constexpr float healthbarWidth = 400.0f;
     constexpr float healthbarHeight = 10.0f;
+    
+    //Slash attack info
+    constexpr float playerSlashWidth = 15.0f;
+    constexpr float playerSlashHeight = 30.0f;
+    constexpr float playerSlashRotSpeed = 90.f;
+    
+    constexpr float bossSlashWidth = 40.0f;
+    constexpr float bossSlashHeight = 60.0f;
+    constexpr float bossSlashRotSpeed = 90.f;
 }
 
 #endif // CONFIG_HPP

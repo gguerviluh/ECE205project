@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-Player::Player(const sf::Vector2f& pos) : grounded(false), health(600), jumpsLeft(maxJumps) {
+Player::Player(const sf::Vector2f& pos) : slash(config::playerSlashWidth, config::playerSlashHeight, sf::Color::White, config::playerSlashRotSpeed), grounded(false), health(600), jumpsLeft(maxJumps), facingRight(true){
     shape.setSize(sf::Vector2f(config::playerWidth, config::playerHeight));
     shape.setFillColor(sf::Color::Red);
     setPosition(pos);
@@ -25,6 +25,16 @@ void Player::handleInput() {
     } else {
         jumpHeld = false;
     }
+    // Slash activation
+    static bool slashHeld = false;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
+        if (!slashHeld && !slash.isActive()) {
+            slash.activate(shape.getPosition(), facingRight);
+        }
+        slashHeld = true;
+    } else {
+        slashHeld = false;
+    }
 }
 
 void Player::update(float dt) {
@@ -39,10 +49,12 @@ void Player::update(float dt) {
     } else {
         grounded = false;
     }
+    slash.update(dt);
 }
 
 void Player::draw(sf::RenderWindow& window) {
     window.draw(shape);
+    slash.draw(window);
 }
 
 void Player::setPosition(const sf::Vector2f& pos) {
@@ -63,7 +75,6 @@ void Player::takeDamage(int damage) {
 		health = 0;
 	}
 }
-
 int Player::getHealth() const { return health; }
 bool Player::isGrounded() const { return grounded; }
 void Player::setGrounded(bool val) { grounded = val; }

@@ -4,6 +4,8 @@
 #include<SFML/Graphics.hpp>
 #include "hitbox.hpp"
 #include "config.hpp"
+#include "attack.hpp"
+#include "slash.hpp"
 
 class Boss : public Hitbox {
 public:

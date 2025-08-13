@@ -32,7 +32,9 @@ void AppManager::run() {
 }
 
 void AppManager::changePage(std::unique_ptr<Page> newPage) {
+    printf("hi2\n");
     currentPage = std::move(newPage);
+    printf("hi3\n");
 }
 
 sf::RenderWindow& AppManager::getWindow() {
