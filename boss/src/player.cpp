@@ -29,7 +29,7 @@ void Player::handleInput() {
     static bool slashHeld = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
         if (!slashHeld && !slash.isActive()) {
-            slash.activate(shape.getPosition(), facingRight);
+            slash.activate(&livePosition, facingRight);
         }
         slashHeld = true;
     } else {
@@ -40,6 +40,8 @@ void Player::handleInput() {
 void Player::update(float dt) {
     if (!grounded) velocity.y += config::gravity * dt;
     shape.move(velocity * dt);
+    
+    livePosition = shape.getPosition();
 
     if (shape.getPosition().y + shape.getSize().y >= config::groundY) {
         shape.setPosition(shape.getPosition().x, config::groundY - shape.getSize().y);
@@ -59,6 +61,7 @@ void Player::draw(sf::RenderWindow& window) {
 
 void Player::setPosition(const sf::Vector2f& pos) {
     shape.setPosition(pos);
+    livePosition = pos;
 }
 
 sf::FloatRect Player::getBounds() const {
@@ -80,3 +83,6 @@ bool Player::isGrounded() const { return grounded; }
 void Player::setGrounded(bool val) { grounded = val; }
 int*  Player::getHealthPtr() { return &health;}
 
+const Slash& Player::getSlash() const {
+    return slash;
+}

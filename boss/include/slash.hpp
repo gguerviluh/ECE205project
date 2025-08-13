@@ -9,7 +9,7 @@ class Slash : public Attack {
 public:
 	Slash(float width, float height, sf::Color color, float rotationSpeed);
 
-	void activate(const sf::Vector2f& playersPos, bool facingRight) override;
+	void activate(const sf::Vector2f* playersPos, bool facingRight) override;
 	void update(float dt) override;
 	void draw(sf::RenderWindow& window) override;
 
@@ -23,9 +23,9 @@ private:
         sf::Color color;
         float rotationSpeed;
         bool facingRight;
-        sf::Vector2f playerPos;
         float currentRotation;
 	float newRotation;
+	const sf::Vector2f* playerPosPtr = nullptr;
 };
 
 #endif // SLASH_HPP

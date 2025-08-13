@@ -45,6 +45,13 @@ bool Boss::isColliding(const Hitbox& other) const {
     return getBounds().intersects(other.getBounds());
 }
 
+void Boss::takeDamage(int damage) {
+       	health -= damage;
+	if (health < 0) {
+		health = 0;
+	}
+}
+
 int Boss::getHealth() const { return health; }
 bool Boss::isGrounded() const { return grounded; }
 void Boss::setGrounded(bool val) { grounded = val; }

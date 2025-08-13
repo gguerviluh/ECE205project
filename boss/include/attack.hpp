@@ -10,7 +10,7 @@ public:
     Attack() : active(false) {}
     virtual ~Attack() = 0;
 
-    virtual void activate(const sf::Vector2f& playerPos, bool facingRight) = 0;
+    virtual void activate(const sf::Vector2f* playerPos, bool facingRight) = 0;
     virtual void update(float dt) = 0;
     virtual void draw(sf::RenderWindow& window) override = 0;
 

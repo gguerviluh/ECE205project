@@ -38,6 +38,9 @@ void Page2::handleEvent(sf::Event& event, sf::RenderWindow& window, float dt) {
 	    player.takeDamage(5);
 	    std::cout << "damage taken"<< std::endl;
     }
+    if (player.getSlash().isColliding(boss)) {
+	    boss.takeDamage(config::playerSlashDmg);
+    }
 }
 void Page2::draw(sf::RenderWindow& window) {
     window.draw(ground);

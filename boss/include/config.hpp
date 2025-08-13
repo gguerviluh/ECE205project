@@ -31,8 +31,9 @@ namespace config {
     
     //Slash attack info
     constexpr float playerSlashWidth = 15.0f;
-    constexpr float playerSlashHeight = 30.0f;
+    constexpr float playerSlashHeight = 70.0f;
     constexpr float playerSlashRotSpeed = 90.f;
+    constexpr int playerSlashDmg = 50;
     
     constexpr float bossSlashWidth = 40.0f;
     constexpr float bossSlashHeight = 60.0f;

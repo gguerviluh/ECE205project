@@ -8,27 +8,31 @@ width(width), height(height), color(color), rotationSpeed(rotationSpeed), facing
 	hitboxShape.setFillColor(sf::Color(0,0,0,0));
 	hitboxShape.setPosition(sf::Vector2f(0.f, 0.f));
 }
-void Slash::activate(const sf::Vector2f& playerPos, bool facingRight) {
-        this->playerPos = playerPos;
+void Slash::activate(const sf::Vector2f* playerPos, bool facingRight) {
+        this->playerPosPtr = playerPos;
         this->facingRight = facingRight;
-	if (facingRight) {
-		hitboxShape.setPosition(playerPos.x + config::playerWidth, playerPos.y);
-		hitboxShape.setFillColor(color);
-		active = true;
-	}
-	else if (!facingRight) {
-		hitboxShape.setPosition(playerPos.x - width ,playerPos.y);
-		hitboxShape.setFillColor(color);
-		active = true;
+	if (playerPosPtr) {
+		if (facingRight) {
+			hitboxShape.setPosition(playerPos->x + config::playerWidth, playerPos->y + (0.5f * config::playerHeight));
+			hitboxShape.setFillColor(color);
+			active = true;
+		}
+		else if (!facingRight) {
+			hitboxShape.setPosition(playerPos->x - width ,playerPos->y + (0.5f * config::playerHeight));
+			hitboxShape.setFillColor(color);
+			active = true;
+		}
 	}
 }
 
 void Slash::update(float dt) {
+	if (!active || !playerPosPtr) return;
+	const sf::Vector2f& playerPos = *playerPosPtr;
 	if (active and facingRight) {
 		currentRotation = hitboxShape.getRotation();
 		hitboxShape.setRotation(0.f);
 		hitboxShape.setOrigin({0.f,0.f});
-		hitboxShape.setPosition(playerPos.x + config::playerWidth, playerPos.y);
+		hitboxShape.setPosition(playerPos.x + config::playerWidth, playerPos.y + (0.5f * config::playerHeight));
 		hitboxShape.setOrigin({0.f, hitboxShape.getSize().y});
 		hitboxShape.setRotation(currentRotation);
 		newRotation = currentRotation + rotationSpeed * dt;
@@ -44,7 +48,7 @@ void Slash::update(float dt) {
 		currentRotation  = hitboxShape.getRotation();
 		hitboxShape.setRotation(0.f);
 		hitboxShape.setOrigin({0.f,0.f});
-		hitboxShape.setPosition(playerPos.x + config::playerWidth, playerPos.y);
+		hitboxShape.setPosition(playerPos.x + config::playerWidth, playerPos.y + (0.5f * config::playerHeight));
 		hitboxShape.setOrigin({hitboxShape.getSize().x, hitboxShape.getSize().y});
 		hitboxShape.setRotation(currentRotation);
 		newRotation = currentRotation - rotationSpeed * dt;

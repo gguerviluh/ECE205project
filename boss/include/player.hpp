@@ -26,7 +26,7 @@ public:
     void takeDamage(int damage);
     void startAttack();
     bool isAttacking() const;
-  
+    const Slash& getSlash() const;
 
 
 private:
@@ -39,6 +39,8 @@ private:
     int jumpsLeft;
     bool facingRight;
     static constexpr int maxJumps = config::maxJumps; 
+    
+    sf::Vector2f livePosition;
 };
 
 
